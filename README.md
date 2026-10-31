@@ -180,6 +180,24 @@ The simulation combines an exact mathematical 4-pointed superellipse rasterizer,
 - **Studio Audio Mixer Console**: Independent volume faders for Master Gain, Atmospheric Wind, Lo-Fi Synthesizer Radio, and Interactive SFX Chimes with background tab auto-mute.
 - **Zero-Crash Storage Sanitization**: Type-safe local schema validator automatically normalizes corrupted or outdated preference records back to healthy factory defaults.
 
+### 23. 🌐 Interactive 3D Constellation Hologram & Celestial Coordinates (`ObservatoryCodexModal`)
+- **Euler 3D Celestial Sphere Engine**: Real-time perspective projection with Euler pitch, yaw, and roll gimbal rotations, rendering orbital celestial rings (Equator, Meridian, NCP Polar Axis) and connected 3D asterisms for all 4 AI constellations (Gemini, GPT, Claude, DeepSeek).
+- **Sub-Pixel Raycast Star Hit-Testing & Reticle**: Interactive raycast detection accurately identifies clicks on 3D star nodes, triggering glowing targeting reticles and visual coordinate emphasis.
+- **Real-Time Astronomical HUD & Sky Dome Radar**: Computes and displays exact Right Ascension (RA $\alpha$), Declination (Dec $\delta$), local Altitude/Azimuth coordinates, and Epoch J2000, paired with a floating circular mini sky-dome radar projection.
+- **Dual Observatory Simulation Modes**: Seamlessly switch between the **3D Celestial Hologram & Coordinates** viewer and the **2D Atmospheric Particle Emitter Simulator** inside the Observatory Codex.
+
+### 24. 🎧 Weather-Driven 3D Spatial Audio & Dynamic Filter Matrix (`SoundscapeMixerModal`)
+- **Acoustic Weather Coupling**: Dynamic DSP biquad filtering and resonance modulation tailored in real time to the active weather mode:
+  - *Thunderstorm*: Resonant low-frequency sub-bass thunderclaps and speed-of-sound reverberation.
+  - *Aurora*: Ethereal harmonic synth swells with dynamic bandpass resonance sweeps.
+  - *Snow & Mist*: Acoustic low-pass muffled dampening and high-altitude whisper noise.
+  - *Golden Clear*: Sparkling high-frequency crystalline chimes and celestial shimmer.
+- **Spatial Acoustic Panning & Master Mixer**: Dual-channel stereo spatial panning, independent gain buses, and background tab auto-suspend.
+
+### 25. ☁️ Physically-Coupled Cloud Aerodynamics & Wind Shear (`AtmosphereStudioDrawer`)
+- **Aerodynamic Drag & Velocity Coupling**: Cloud layer flow velocity and volumetric density dynamically adapt to current weather conditions, altitude barometric strata, and flight velocity (Mach burst acceleration).
+- **Multi-Strata Wind Shear**: Simulates stratified atmospheric wind shear across Thermosphere, Mesosphere, and Stratosphere layers with real-time Reynolds turbulence.
+
 <br />
 
 ---
@@ -206,7 +224,7 @@ Control flight physics and atmospheric parameters via HUD decks and hotkeys:
 ┌────────────────────────────────────────────────────────────────────────┐
 │ [Top Navigation Deck]                                                  │
 │   • View Modes: [Standard HUD] / [Split Radar Observatory] / [Zen]    │
-│   • Celestial Codex: Deep-dive specs, trajectory density charts & lore │
+│   • Celestial Codex: Deep-dive specs, 3D hologram & trajectory charts  │
 │   • Atmosphere Studio: Sliders for cloud density, wind speed & shake   │
 │   • GIF Studio: Customize, preview, and encode pixel art GIF loops    │
 │   • Viewpoints: Load presets or bookmark custom weather combinations   │
@@ -249,10 +267,10 @@ Control flight physics and atmospheric parameters via HUD decks and hotkeys:
 - **UI Framework**: React 19 (Hooks, Functional Component Architecture)
 - **Language**: TypeScript 5 (Strict Mode, 0 Linter Errors)
 - **Styling**: Tailwind CSS v4 + Framer Motion
-- **Graphics Pipeline**: HTML5 Canvas 2D (`imageSmoothingEnabled: false`)
-- **Data Visualization**: Recharts (Trajectory & Altitude Density graphs)
+- **Graphics Pipeline**: HTML5 Canvas 2D (`imageSmoothingEnabled: false`) & 3D Math Engine (Euler Rotations, Raycasting, Perspective Projections)
+- **Data Visualization**: D3.js (Telemetry & Trajectory Density graphs)
 - **GIF Encoding**: `gifenc` (NeuQuant color quantization, binary GIF89a serialization)
-- **Audio Synthesizer**: Web Audio API (BiquadFilter, OscillatorNode, GainNode)
+- **Audio Synthesizer**: Web Audio API (BiquadFilter, OscillatorNode, GainNode, Weather DSP Matrix)
 - **Icons**: Lucide React
 - **Build Tooling**: Vite 6, TSX, Node.js Built-in Test Runner (`node:test`)
 
@@ -283,7 +301,7 @@ Open `http://localhost:3000` in your browser to experience the cinematic pixel a
 ```bash
 npm test
 ```
-*Executes all 137 unit and stress tests across 11 test suites verifying flight session auto-recovery, geometry formulas, trajectory physics, residual afterglows, dragon sprite engines, viewpoint storage, black hole gravity, arcade scoring, satellite kinematics, lightning fractals, i18n key parity, blackbox backup validation, adaptive quality guards, particle pool O(1) recycling, GPU context recovery, and Web Audio safety.*
+*Executes all 158 unit and stress tests across 13 test suites verifying 3D constellation mathematical topologies, Euler rotation vector norms, perspective raycast hit-testing, weather DSP audio matrices, flight session auto-recovery, geometry formulas, trajectory physics, residual afterglows, dragon sprite engines, viewpoint storage, black hole gravity, arcade scoring, satellite kinematics, lightning fractals, i18n key parity, blackbox backup validation, adaptive quality guards, particle pool O(1) recycling, GPU context recovery, and Web Audio safety.*
 
 ### 4. Build for Production
 ```bash

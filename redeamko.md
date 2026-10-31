@@ -180,6 +180,24 @@
 - **스튜디오 오디오 믹서 콘솔**: 마스터 게인, 대기 바람 소리, 로파이 신스 라디오, 인터랙티브 효과음 볼륨을 개별 슬라이더로 조절하며 백그라운드 탭 자동 음소거 지원.
 - **무손실 스토리지 살균화 (Sanitization)**: 손상되거나 버전이 다른 `localStorage` 데이터를 안전하게 감지하여 결함 없이 정상 기본값으로 자동 교정 복구.
 
+### 23. 🌐 인터랙티브 3D 성좌 천체 홀로그램 & 위치 강조 시스템 (`ObservatoryCodexModal`)
+- **오일러 3D 천구 수학 엔진**: 오일러 피치(Pitch), 요(Yaw), 롤(Roll) 짐벌 회전과 투시 원근 투영을 지원하여 천구 적도(Celestial Equator), 본초 자오선(Prime Meridian), 북극성 축(NCP Polar Axis) 및 4대 AI 성좌(Gemini, GPT, Claude, DeepSeek)의 3차원 성좌 위상 렌더링.
+- **서브픽셀 레이캐스트 별 클릭 판정 & 타겟 조준선**: 3D 회전 상태의 별 노드를 클릭하면 광선 추적(Raycast) 알고리즘이 최근접 별을 판정하여 네온 발광 타겟 조준선과 원형 하이라이트 링을 즉각 시각화.
+- **실시간 천문 좌표 HUD & 미니 천구 돔 레이더**: 클릭된 항성의 정밀 적경(RA $\alpha$), 적위(Dec $\delta$), 고도/방위각(Alt/Az), 역원(Epoch J2000) 정보를 오버레이하고, 미니 돔 레이더를 통해 실시간 천구 내 위치를 입체 매핑.
+- **천체 도감 듀얼 모드 전환**: 천체 도감 내에서 **3D 성좌 천체 홀로그램 & 위치 강조** 모드와 **2D 대기 입자 방출 시뮬레이터** 모드를 자유롭게 전환.
+
+### 24. 🎧 날씨 연동 3D 입체 음향 & 사운드 필터링 매트릭스 (`SoundscapeMixerModal`)
+- **기상 모드별 실시간 DSP 필터 연동**: 현재 선택된 기상 모드(폭풍우, 오로라, 눈, 안개, 맑음)에 따라 Web Audio biquad 필터와 공명 주파수를 실시간 조율:
+  - *폭풍우 (Thunderstorm)*: 웅장한 저주파 천둥 굉음과 음속 지연 공간 잔향음 증폭.
+  - *오로라 (Aurora)*: 몽환적인 코스믹 신스 하모니와 다이내믹 밴드패스 레조넌스 스윕 강조.
+  - *눈 & 안개 (Snow & Mist)*: 대기에 스며드는 부드러운 로우패스 댐핑과 고요한 백색소음 바람.
+  - *정오 쾌청 (Golden Clear)*: 맑고 영롱한 고주파 크리스탈 펜타토닉 차임 사운드.
+- **공간 패닝 및 마스터 믹서**: 스테레오 3D 음장 공간감과 슬라이더 기반의 독립 볼륨 버스 제어.
+
+### 25. ☁️ 물리 연동 구름 유체역학 & 윈드 시어 엔진 (`AtmosphereStudioDrawer`)
+- **대기 항력 및 하강 속도 물리 연동**: 구름의 흐름 속도와 볼류메트릭 입자 밀도가 현재 기상 모드, 고도별 기압층, 하강 비행 속도(마하 가속)와 정밀하게 역학 연동.
+- **다계층 윈드 시어(Wind Shear)**: 열권, 중간권, 성층권 각 층위별 기류 난류(Reynolds Turbulence)를 실시간 반영하여 생동감 넘치는 구름 층류 연출.
+
 <br />
 
 ---
@@ -206,7 +224,7 @@
 ┌────────────────────────────────────────────────────────────────────────┐
 │ [상단 툴바]                                                            │
 │   • 뷰 모드 전환: [표준 HUD] / [분할 레이더 덱] / [시네마틱 젠 모드]   │
-│   • 천체 도감: AI 성좌들의 상세 스펙, 궤적 밀도 차트 & 로어 열람       │
+│   • 천체 도감: 3D 성좌 홀로그램, AI 성좌 스펙, 궤적 밀도 차트 & 로어   │
 │   • 대기 스튜디오: 구름 밀도, 풍속, 흔들림 강도 정밀 슬라이더         │
 │   • GIF 스튜디오: 픽셀 아트 애니메이션 커스텀 제작 및 다운로드        │
 │   • 뷰포인트: 시네마틱 프리셋 로드 및 현재 대기 조합 북마크 저장       │
@@ -249,10 +267,10 @@
 - **UI Framework**: React 19 (Hooks, Functional Architecture)
 - **Language**: TypeScript (Strict Typing, Zero Linter Warnings)
 - **Styling**: Tailwind CSS v4 + Framer Motion
-- **Graphics Pipeline**: Pure HTML5 Canvas 2D Context (`imageSmoothingEnabled: false`)
-- **Visualization**: Recharts (천체 도감 대기 밀도 & 하강 궤적 차트)
+- **Graphics Pipeline**: Pure HTML5 Canvas 2D Context (`imageSmoothingEnabled: false`) & 3D Math Engine (Euler Rotations, Raycasting, Perspective Projections)
+- **Visualization**: D3.js (천체 도감 대기 밀도 & 하강 궤적 차트)
 - **GIF Encoder**: `gifenc` (NeuQuant 색상 양자화, GIF89a 바이너리 직렬화)
-- **Sound Engine**: Web Audio API (BiquadFilter, Oscillator, GainNode)
+- **Sound Engine**: Web Audio API (BiquadFilter, Oscillator, GainNode, Weather DSP Matrix)
 - **Icons**: Lucide React Icons
 - **Bundler & Tooling**: Vite 6, TSX, Node.js Built-in Test Runner (`node:test`)
 
@@ -283,7 +301,7 @@ npm run dev
 ```bash
 npm test
 ```
-*137개의 기하학, 궤적 물리, 유성우 잔상광, 시네마틱 뷰포인트 엔진, 드래곤 스프라이트, 블랙홀 중력 왜곡, 아케이드 링 수집, 인공위성 비행 역학, 프랙탈 낙뢰 시스템, 비행 세션 자동 복구, 다국어 i18n 동기화, 블랙박스 백업 무결성, 적응형 성능 가드, 파티클 오브젝트 풀링 O(1) 순환, GPU 컨텍스트 복구, 환경설정 살균화, 에러 복구 및 극한 스트레스 단위 테스트가 100% 통과합니다.*
+*158개의 3D 성좌 수학적 위상, 오일러 회전 벡터 보존, 원근 레이캐스트 히트테스트, 기상 DSP 오디오 매트릭스, 기하학, 궤적 물리, 유성우 잔상광, 시네마틱 뷰포인트 엔진, 드래곤 스프라이트, 블랙홀 중력 왜곡, 아케이드 링 수집, 인공위성 비행 역학, 프랙탈 낙뢰 시스템, 비행 세션 자동 복구, 다국어 i18n 동기화, 블랙박스 백업 무결성, 적응형 성능 가드, 파티클 오브젝트 풀링 O(1) 순환, GPU 컨텍스트 복구, 환경설정 살균화, 에러 복구 및 극한 스트레스 단위 테스트가 100% 통과합니다.*
 
 ### 4. 프로덕션 빌드
 ```bash
