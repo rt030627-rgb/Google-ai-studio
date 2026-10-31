@@ -1,0 +1,6 @@
+{
+  "name": "Google Gemini Descent - 시네마틱 픽셀 아트",
+  "description": "상공에서 구름을 가르고 광활한 대지와 바다의 수평선으로 하강하는 구글 제미나이 성좌의 시네마틱 도트 아트",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

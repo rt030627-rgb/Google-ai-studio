@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Noto Sans KR', 'Galmuri11', 'Galmuri9', sans-serif, system-ui;
+  --font-mono: 'Galmuri11', 'Galmuri9', 'Noto Sans KR', ui-monospace, SFMono-Regular, monospace;
+  --font-pixel: 'Silkscreen', 'Galmuri11', 'Galmuri9', 'Noto Sans KR', monospace;
+}
+
+*, body, button, input, select, textarea, div, span, p, td, th {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+@layer utilities {
+  .font-pixel {
+    font-family: 'Silkscreen', 'Galmuri11', 'Galmuri9', 'Noto Sans KR', monospace, system-ui !important;
+  }
+  .pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Retro CRT scanline effect */
+.crt-overlay {
+  background: linear-gradient(
+    rgba(18, 16, 38, 0) 50%, 
+    rgba(0, 0, 0, 0.35) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* Subtle glowing pulse */
+@keyframes gemini-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.3)) drop-shadow(0 0 35px rgba(217, 70, 239, 0.25));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.5)) drop-shadow(0 0 50px rgba(217, 70, 239, 0.4));
+  }
+}
+
+.gemini-glow {
+  animation: gemini-pulse 4s ease-in-out infinite;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
