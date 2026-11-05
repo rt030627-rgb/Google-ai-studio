@@ -67,6 +67,8 @@ export interface TranslationDictionary {
   audioMasterVolume: string;
   audioMuted: string;
   retroScanlines: string;
+  hudOpacityLabel: string;
+  hudOpacityDesc: string;
   saveAndClose: string;
   resetDefaults: string;
 
@@ -165,6 +167,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
     audioMasterVolume: 'MASTER AUDIO SYNTHESIZER',
     audioMuted: 'MUTE ALL SOUNDS',
     retroScanlines: 'CRT SCANLINE RETRO FILTER',
+    hudOpacityLabel: 'HUD OVERALL OPACITY',
+    hudOpacityDesc: 'Adjust transparency level of flight telemetry, navigation overlays, and control decks.',
     saveAndClose: 'SAVE & CLOSE',
     resetDefaults: 'RESET TO DEFAULTS',
 
@@ -257,6 +261,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
     audioMasterVolume: '마스터 오디오 신디사이저',
     audioMuted: '모든 사운드 음소거',
     retroScanlines: 'CRT 스캔라인 레트로 필터',
+    hudOpacityLabel: 'HUD 전체 투명도',
+    hudOpacityDesc: '비행 텔레메트리, 내비게이션 오버레이, 제어 데크 등 전반적인 HUD 인터페이스의 투명도를 조절합니다.',
     saveAndClose: '저장 및 닫기',
     resetDefaults: '기본값으로 복원',
 

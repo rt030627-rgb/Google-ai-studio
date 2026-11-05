@@ -832,6 +832,9 @@ function MainSimulationApp() {
   const shouldHideBottomHud =
     (userSettings.autoHideHud ?? true) && isIdle && !isAnyModalOpen;
 
+  // Real-time HUD Overall Opacity level (0.2 ~ 1.0) dynamically synchronized with SettingsModal
+  const hudOpacity = Math.max(0.2, Math.min(1.0, userSettings.hudOpacity ?? 1.0));
+
   const handleControlsMouseEnter = useCallback(() => {
     isHoveringControlsRef.current = true;
     setIsIdle(false);
@@ -1113,7 +1116,10 @@ function MainSimulationApp() {
       </AnimatePresence>
 
       {/* Main Viewport Container */}
-      <div className="relative flex-1 w-full h-full flex overflow-hidden">
+      <div
+        className="relative flex-1 w-full h-full flex overflow-hidden"
+        style={{ '--hud-opacity': hudOpacity } as React.CSSProperties}
+      >
         {/* Main Canvas View Area with Framer Motion Layout Animation */}
         <motion.div
           layout
@@ -1228,7 +1234,7 @@ function MainSimulationApp() {
               <motion.div
                 key="glider-flight-hud"
                 initial={{ opacity: 0, y: -15, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
+                animate={{ opacity: hudOpacity, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -15, scale: 0.96 }}
                 transition={{ duration: 0.25, ease: 'easeOut' }}
                 className="absolute top-4 right-4 sm:top-5 sm:right-1/2 sm:translate-x-1/2 z-40 flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-2xl bg-indigo-950/90 border border-indigo-400/50 text-indigo-200 backdrop-blur-md shadow-2xl font-mono text-[11px] select-none"
@@ -1336,7 +1342,7 @@ function MainSimulationApp() {
               <motion.div
                 key="starchart-hud"
                 initial={{ opacity: 0, x: -15 }}
-                animate={{ opacity: 1, x: 0 }}
+                animate={{ opacity: hudOpacity, x: 0 }}
                 exit={{ opacity: 0, x: -15 }}
                 className="absolute top-16 left-4 z-40 flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-cyan-950/85 border border-cyan-400/50 text-cyan-200 backdrop-blur-md shadow-xl font-mono text-[11px] select-none"
               >
@@ -1363,7 +1369,7 @@ function MainSimulationApp() {
               <motion.div
                 key="weather-transition-hud"
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
+                animate={{ opacity: hudOpacity, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 className="absolute top-28 left-4 z-40 flex items-center gap-2.5 px-3.5 py-1.5 rounded-2xl bg-sky-950/85 border border-sky-400/50 text-sky-200 backdrop-blur-md shadow-xl font-mono text-[11px] select-none"
               >
@@ -1384,7 +1390,7 @@ function MainSimulationApp() {
               <motion.div
                 key="blackhole-banner"
                 initial={{ opacity: 0, y: -20, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
+                animate={{ opacity: hudOpacity, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 0.95 }}
                 className="absolute top-28 left-1/2 -translate-x-1/2 z-40 pointer-events-none select-none"
               >
@@ -1405,7 +1411,7 @@ function MainSimulationApp() {
               <motion.div
                 key="arcade-score-hud"
                 initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
+                animate={{ opacity: hudOpacity, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 className="absolute top-16 right-4 z-40 flex flex-col items-end gap-1 px-4 py-2.5 rounded-2xl bg-slate-950/90 border border-amber-500/50 text-amber-200 backdrop-blur-md shadow-xl font-mono select-none"
               >
@@ -1432,7 +1438,7 @@ function MainSimulationApp() {
               <motion.div
                 key="sat-telemetry-card"
                 initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={{ opacity: hudOpacity, y: 0 }}
                 exit={{ opacity: 0, y: 15 }}
                 className="absolute bottom-28 left-1/2 -translate-x-1/2 z-40 max-w-sm w-full p-3.5 rounded-2xl bg-slate-950/90 border border-sky-400/50 text-slate-100 backdrop-blur-md shadow-2xl font-mono text-xs select-none pointer-events-none"
               >
@@ -1464,7 +1470,7 @@ function MainSimulationApp() {
               <motion.div
                 key="orbital-zoom-hud-banner"
                 initial={{ opacity: 0, y: -28, scale: 0.94 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
+                animate={{ opacity: hudOpacity, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -24, scale: 0.94 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute top-16 sm:top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-auto select-none max-w-[94vw] w-auto"
@@ -1536,10 +1542,14 @@ function MainSimulationApp() {
             telemetry={telemetry}
             speedMode={speedMode}
             isDragonActive={isDragonEncounterActive}
+            style={{
+              opacity: shouldHideBottomHud && viewLayout !== 'cinematic' ? 0 : hudOpacity,
+              transition: 'opacity 0.25s ease-out',
+            }}
             className={`transition-opacity duration-500 ${
               shouldHideBottomHud && viewLayout !== 'cinematic'
-                ? 'opacity-0 pointer-events-none'
-                : 'opacity-100 pointer-events-auto'
+                ? 'pointer-events-none'
+                : 'pointer-events-auto'
             }`}
           />
 
@@ -1560,10 +1570,14 @@ function MainSimulationApp() {
                 badgeToastTimeoutRef.current = null;
               }, 4000);
             }}
+            style={{
+              opacity: shouldHideBottomHud && viewLayout !== 'cinematic' ? 0 : hudOpacity,
+              transition: 'opacity 0.25s ease-out',
+            }}
             className={`transition-opacity duration-500 ${
               shouldHideBottomHud && viewLayout !== 'cinematic'
-                ? 'opacity-0 pointer-events-none'
-                : 'opacity-100 pointer-events-auto'
+                ? 'pointer-events-none'
+                : 'pointer-events-auto'
             }`}
           />
 
@@ -1797,7 +1811,7 @@ function MainSimulationApp() {
                 initial={{ y: -30, opacity: 0 }}
                 animate={{
                   y: shouldHideBottomHud ? (userSettings.reduceMotion ? 0 : -26) : 0,
-                  opacity: shouldHideBottomHud ? 0 : 1,
+                  opacity: shouldHideBottomHud ? 0 : hudOpacity,
                   scale: shouldHideBottomHud ? (userSettings.reduceMotion ? 1 : 0.98) : 1,
                 }}
                 exit={{ y: -35, opacity: 0 }}
@@ -2251,7 +2265,7 @@ function MainSimulationApp() {
                   initial={{ y: 25, opacity: 0, scale: 0.95 }}
                   animate={{
                     y: shouldHideBottomHud ? (userSettings.reduceMotion ? 0 : 20) : 0,
-                    opacity: shouldHideBottomHud ? 0 : 1,
+                    opacity: shouldHideBottomHud ? 0 : hudOpacity,
                     scale: shouldHideBottomHud ? 0.95 : 1,
                   }}
                   exit={{ y: 25, opacity: 0, scale: 0.95 }}
@@ -2367,7 +2381,7 @@ function MainSimulationApp() {
                   initial={{ y: 40, opacity: 0 }}
                   animate={{
                     y: shouldHideBottomHud ? (userSettings.reduceMotion ? 0 : 36) : 0,
-                    opacity: shouldHideBottomHud ? 0 : 1,
+                    opacity: shouldHideBottomHud ? 0 : hudOpacity,
                     scale: shouldHideBottomHud ? (userSettings.reduceMotion ? 1 : 0.96) : 1,
                   }}
                   exit={{ y: 45, opacity: 0 }}
@@ -2813,7 +2827,7 @@ function MainSimulationApp() {
             <motion.aside
               key="split-radar-aside"
               initial={{ x: '100%', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
+              animate={{ x: 0, opacity: hudOpacity }}
               exit={{ x: '100%', opacity: 0 }}
               transition={{
                 type: 'spring',

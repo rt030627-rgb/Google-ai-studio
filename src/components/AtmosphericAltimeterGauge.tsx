@@ -17,6 +17,7 @@ interface AtmosphericAltimeterGaugeProps {
   speedMode: 'cinematic' | 'normal' | 'mach';
   isDragonActive?: boolean;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export const AtmosphericAltimeterGauge: React.FC<AtmosphericAltimeterGaugeProps> = ({
@@ -24,12 +25,14 @@ export const AtmosphericAltimeterGauge: React.FC<AtmosphericAltimeterGaugeProps>
   speedMode,
   isDragonActive = false,
   className = '',
+  style,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { currentLayer, altitudeKm, machNumber, pressureHpa, temperatureC, plasmaFrictionIntensity } = telemetry;
 
   return (
     <div
+      style={style}
       className={`fixed left-3 top-20 z-20 pointer-events-auto transition-all duration-300 select-none ${className}`}
     >
       <div className="relative flex items-start gap-1">

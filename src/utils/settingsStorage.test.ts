@@ -34,6 +34,7 @@ test('Settings Storage Engine', async (t) => {
       crtScanlines: 'true', // Not boolean -> fallback to true
       fpsLimit: 144, // Invalid target -> fallback to 60
       encounterShakeIntensity: 99, // Out of bounds -> should clamp to 10
+      hudOpacity: 9.99, // Out of bounds -> should clamp to 1.0
     };
 
     const sanitized = sanitizeSettings(malformed);
@@ -44,9 +45,11 @@ test('Settings Storage Engine', async (t) => {
     assert.equal(sanitized.fpsLimit, 60);
     assert.equal(sanitized.screenShake, DEFAULT_USER_SETTINGS.screenShake);
     assert.equal(sanitized.encounterShakeIntensity, 10);
+    assert.equal(sanitized.hudOpacity, 1.0);
 
-    const minEncounter = sanitizeSettings({ encounterShakeIntensity: -99 });
+    const minEncounter = sanitizeSettings({ encounterShakeIntensity: -99, hudOpacity: -5.0 });
     assert.equal(minEncounter.encounterShakeIntensity, 1);
+    assert.equal(minEncounter.hudOpacity, 0.2);
   });
 
   await t.test('sanitizeSettings should preserve valid customized settings', () => {
@@ -65,6 +68,7 @@ test('Settings Storage Engine', async (t) => {
       fpsLimit: 30,
       reduceMotion: true,
       autoHideHud: false,
+      hudOpacity: 0.65,
       autoSystemNightTheme: false,
     };
 

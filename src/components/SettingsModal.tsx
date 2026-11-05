@@ -907,6 +907,41 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 </button>
               </div>
 
+              {/* HUD Overall Opacity Slider (20% ~ 100%) */}
+              <div className="pt-2 border-t border-slate-800/60">
+                <div className="flex items-center justify-between mb-1.5">
+                  <div>
+                    <span className="font-medium text-slate-200 block">
+                      {t('hudOpacityLabel')}
+                    </span>
+                    <span className="text-[11px] text-slate-400">
+                      {t('hudOpacityDesc')}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                    <span className="px-2 py-0.5 rounded text-xs font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                      {Math.round((settings.hudOpacity ?? 1) * 100)}%
+                    </span>
+                  </div>
+                </div>
+                <input
+                  type="range"
+                  min="0.2"
+                  max="1.0"
+                  step="0.05"
+                  value={settings.hudOpacity ?? 1}
+                  onChange={(e) => handleSliderChange('hudOpacity', parseFloat(e.target.value))}
+                  className="w-full h-1.5 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                  aria-label={t('hudOpacityLabel')}
+                  data-testid="hud-opacity-slider"
+                />
+                <div className="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                  <span>20% ({language === 'ko' ? '최대 투명' : 'Min Glass'})</span>
+                  <span>60% ({language === 'ko' ? '반투명' : 'Semi-transparent'})</span>
+                  <span>100% ({language === 'ko' ? '불투명' : 'Opaque'})</span>
+                </div>
+              </div>
+
               {/* Local System Time Auto Night Mode & Midnight Weather */}
               <div className="flex items-center justify-between">
                 <div>

@@ -29,6 +29,7 @@ interface FlightLogBadgeDeckProps {
   language: 'ko' | 'en';
   onBadgeSelect?: (badge: FlightLogBadge) => void;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export const getBadgeIcon = (iconName: string, className = 'w-3.5 h-3.5') => {
@@ -59,6 +60,7 @@ export const FlightLogBadgeDeck: React.FC<FlightLogBadgeDeckProps> = ({
   language,
   onBadgeSelect,
   className = '',
+  style,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hoveredBadge, setHoveredBadge] = useState<FlightLogBadge | null>(null);
@@ -68,6 +70,7 @@ export const FlightLogBadgeDeck: React.FC<FlightLogBadgeDeckProps> = ({
 
   return (
     <div
+      style={style}
       className={`fixed left-3 top-[17.5rem] z-20 pointer-events-auto select-none transition-all duration-300 ${className}`}
     >
       <div

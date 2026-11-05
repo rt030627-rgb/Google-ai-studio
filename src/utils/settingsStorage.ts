@@ -27,6 +27,7 @@ export interface UserSettingsProfile {
   // Accessibility & UX
   reduceMotion: boolean;
   autoHideHud: boolean;
+  hudOpacity: number; // 0.2 to 1.0 HUD elements transparency scale
   autoSystemNightTheme: boolean; // Auto-load dark theme & Midnight weather between 8 PM and 6 AM
 }
 
@@ -47,6 +48,7 @@ export const DEFAULT_USER_SETTINGS: Readonly<UserSettingsProfile> = {
   fpsLimit: 60,
   reduceMotion: false,
   autoHideHud: true,
+  hudOpacity: 1.0,
   autoSystemNightTheme: true,
 };
 
@@ -103,6 +105,12 @@ export function sanitizeSettings(raw: unknown): UserSettingsProfile {
     fpsLimit,
     reduceMotion: typeof data.reduceMotion === 'boolean' ? data.reduceMotion : DEFAULT_USER_SETTINGS.reduceMotion,
     autoHideHud: typeof data.autoHideHud === 'boolean' ? data.autoHideHud : DEFAULT_USER_SETTINGS.autoHideHud,
+    hudOpacity: clamp(
+      typeof data.hudOpacity === 'number' ? data.hudOpacity : undefined,
+      0.2,
+      1.0,
+      DEFAULT_USER_SETTINGS.hudOpacity
+    ),
     autoSystemNightTheme:
       typeof data.autoSystemNightTheme === 'boolean' ? data.autoSystemNightTheme : DEFAULT_USER_SETTINGS.autoSystemNightTheme,
   };
