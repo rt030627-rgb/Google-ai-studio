@@ -5,10 +5,14 @@ import {
   summarizeTelemetrySeries,
   generateSeedTelemetryHistory,
   MAX_TELEMETRY_HISTORY_POINTS,
+  TELEMETRY_REFRESH_INTERVAL_MS,
   type TelemetryDataPoint,
 } from './telemetryChartEngine';
 
 test('Telemetry Chart Engine Suite', async (t) => {
+  await t.test('TELEMETRY_REFRESH_INTERVAL_MS is exactly 600ms', () => {
+    assert.equal(TELEMETRY_REFRESH_INTERVAL_MS, 600);
+  });
   await t.test('appendTelemetrySample adds new samples and bounds to maxPoints', () => {
     let history: TelemetryDataPoint[] = [];
 

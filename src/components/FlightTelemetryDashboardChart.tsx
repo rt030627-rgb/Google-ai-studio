@@ -150,44 +150,64 @@ export const FlightTelemetryDashboardChart: React.FC<FlightTelemetryDashboardCha
           </span>
         </div>
 
-        {/* Metric Selector Tabs */}
-        <div className="flex items-center bg-slate-950 border border-slate-800 rounded-lg p-0.5">
-          <button
-            type="button"
-            onClick={() => setActiveMetric('dual')}
-            className={`px-1.5 py-0.5 rounded text-[9.5px] font-mono transition-colors cursor-pointer ${
-              activeMetric === 'dual'
-                ? 'bg-cyan-600 text-white font-bold'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-            title="고도 + 속도 동시 표시"
+        <div className="flex items-center gap-2">
+          {/* 600ms Telemetry Stream Refresh Indicator Ring */}
+          <div
+            className="flex items-center gap-1.5 px-1.5 py-0.5 rounded-full bg-slate-950/80 border border-cyan-500/30 text-[9px] font-mono text-cyan-300 shadow-sm shadow-cyan-500/10"
+            title={language === 'ko' ? '실시간 데이터 갱신 주기: 600ms' : 'Data Refresh Interval: 600ms'}
+            data-testid="telemetry-refresh-indicator"
+            aria-label={language === 'ko' ? '데이터 갱신 주기 600ms' : 'Data refresh rate 600ms'}
           >
-            {language === 'ko' ? '복합' : 'DUAL'}
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveMetric('altitude')}
-            className={`px-1.5 py-0.5 rounded text-[9.5px] font-mono transition-colors cursor-pointer ${
-              activeMetric === 'altitude'
-                ? 'bg-cyan-600 text-white font-bold'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-            title="고도 vs 시간"
-          >
-            {language === 'ko' ? '고도' : 'ALT'}
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveMetric('velocity')}
-            className={`px-1.5 py-0.5 rounded text-[9.5px] font-mono transition-colors cursor-pointer ${
-              activeMetric === 'velocity'
-                ? 'bg-indigo-600 text-white font-bold'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-            title="강하 속도 (Mach/Velocity)"
-          >
-            {language === 'ko' ? '속도' : 'SPD'}
-          </button>
+            <div className="relative w-3 h-3 flex items-center justify-center">
+              {/* Outer static track */}
+              <div className="absolute inset-0 rounded-full border border-cyan-500/20" />
+              {/* Rotating 600ms progress ring */}
+              <div className="absolute inset-0 rounded-full border-t border-r border-transparent border-t-cyan-400 border-r-cyan-300 animate-spin-600ms" />
+              {/* Core pulsing dot */}
+              <div className="w-1 h-1 rounded-full bg-cyan-300 animate-ping opacity-75" />
+            </div>
+            <span className="font-semibold tracking-tight text-cyan-200">600ms</span>
+          </div>
+
+          {/* Metric Selector Tabs */}
+          <div className="flex items-center bg-slate-950 border border-slate-800 rounded-lg p-0.5">
+            <button
+              type="button"
+              onClick={() => setActiveMetric('dual')}
+              className={`px-1.5 py-0.5 rounded text-[9.5px] font-mono transition-colors cursor-pointer ${
+                activeMetric === 'dual'
+                  ? 'bg-cyan-600 text-white font-bold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+              title="고도 + 속도 동시 표시"
+            >
+              {language === 'ko' ? '복합' : 'DUAL'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveMetric('altitude')}
+              className={`px-1.5 py-0.5 rounded text-[9.5px] font-mono transition-colors cursor-pointer ${
+                activeMetric === 'altitude'
+                  ? 'bg-cyan-600 text-white font-bold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+              title="고도 vs 시간"
+            >
+              {language === 'ko' ? '고도' : 'ALT'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveMetric('velocity')}
+              className={`px-1.5 py-0.5 rounded text-[9.5px] font-mono transition-colors cursor-pointer ${
+                activeMetric === 'velocity'
+                  ? 'bg-indigo-600 text-white font-bold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+              title="강하 속도 (Mach/Velocity)"
+            >
+              {language === 'ko' ? '속도' : 'SPD'}
+            </button>
+          </div>
         </div>
       </div>
 

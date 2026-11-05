@@ -137,6 +137,7 @@ import {
   type TelemetryDataPoint,
   appendTelemetrySample,
   generateSeedTelemetryHistory,
+  TELEMETRY_REFRESH_INTERVAL_MS,
 } from './utils/telemetryChartEngine';
 
 function MainSimulationApp() {
@@ -661,7 +662,7 @@ function MainSimulationApp() {
           color: telemetry.currentLayer.accentHex,
         })
       );
-    }, 600);
+    }, TELEMETRY_REFRESH_INTERVAL_MS);
 
     return () => window.clearInterval(interval);
   }, [orbitalZoomState?.isActive, orbitalZoomState?.altitudeKm, telemetry]);

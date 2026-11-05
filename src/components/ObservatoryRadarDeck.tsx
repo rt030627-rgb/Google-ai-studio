@@ -203,9 +203,20 @@ export const ObservatoryRadarDeck: React.FC<ObservatoryRadarDeckProps> = ({
               ? 'bg-cyan-600 text-white shadow-md'
               : 'text-slate-400 hover:text-white'
           }`}
+          title={language === 'ko' ? '실시간 텔레메트리 (600ms 주기 갱신)' : 'Real-time telemetry (600ms cycle)'}
         >
           <BarChart3 className="w-3.5 h-3.5" />
           <span>{language === 'ko' ? '텔레메트리 차트' : 'D3 CHART'}</span>
+          <span
+            className="flex items-center gap-1 pl-1 ml-0.5 border-l border-white/20"
+            data-testid="radar-deck-chart-rate-indicator"
+          >
+            <span className="relative w-2.5 h-2.5 flex items-center justify-center">
+              <span className="absolute inset-0 rounded-full border border-white/30" />
+              <span className="absolute inset-0 rounded-full border-t border-r border-transparent border-t-cyan-300 border-r-white animate-spin-600ms" />
+            </span>
+            <span className="text-[9px] font-mono tracking-tighter opacity-90">600ms</span>
+          </span>
         </button>
 
         <button

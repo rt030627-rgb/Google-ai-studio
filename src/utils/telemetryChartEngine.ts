@@ -28,6 +28,7 @@ export interface TelemetrySeriesSummary {
 }
 
 export const MAX_TELEMETRY_HISTORY_POINTS = 60;
+export const TELEMETRY_REFRESH_INTERVAL_MS = 600;
 
 /**
  * Appends a new sample to the telemetry time series ring-buffer.
